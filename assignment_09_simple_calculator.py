@@ -68,3 +68,79 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+
+
+def show_menu():
+    print("============================")
+    print("     SIMPLE CALCULATOR")
+    print("============================")
+    print("1. Add")
+    print("2. Subtract")
+    print("3. Multiply")
+    print("4. Divide")
+    print("5. Quit")
+
+
+def add(a, b):
+    return a + b
+
+
+def subtract(a, b):
+    return a - b
+
+
+def multiply(a, b):
+    return a * b
+
+
+def divide(a, b):
+    if b == 0:
+        return None
+    return a / b
+
+
+def get_two_numbers():
+    a = float(input("Enter first number: "))
+    b = float(input("Enter second number: "))
+    return a, b
+
+
+def main():
+    operations = {
+        "1": ("+", add),
+        "2": ("-", subtract),
+        "3": ("*", multiply),
+    }
+
+    while True:
+        show_menu()
+        choice = input("Enter your choice (1-5): ")
+        print()
+
+        if choice in operations:
+            symbol, func = operations[choice]
+            a, b = get_two_numbers()
+            print(f"Result: {a:g} {symbol} {b:g} = {func(a, b):g}")
+
+        elif choice == "4":
+            a, b = get_two_numbers()
+            result = divide(a, b)
+            if result is None:
+                print("Error: Cannot divide by zero.")
+            else:
+                print(f"Result: {a:g} / {b:g} = {result:g}")
+
+        elif choice == "5":
+            print("Goodbye!")
+            break
+
+        else:
+            print("Error: Invalid choice. Please enter a number from 1 to 5.")
+
+        print()
+
+
+if __name__ == "__main__":
+    main()
+
