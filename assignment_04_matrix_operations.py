@@ -60,3 +60,89 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+
+def read_matrix(rows, cols, label=""):
+    print(f"Enter matrix {label} ({rows} x {cols}):")
+    matrix = []
+    for i in range(rows):
+        row = list(map(float, input(f"Enter row {i + 1}: ").split()))
+        matrix.append(row)
+    return matrix
+
+
+def print_matrix(matrix):
+    for row in matrix:
+        print("  ".join(f"{val:g}" for val in row))
+
+
+def transpose(matrix):
+    rows = len(matrix)
+    cols = len(matrix[0])
+    result = [[0] * rows for _ in range(cols)]
+    for i in range(rows):
+        for j in range(cols):
+            result[j][i] = matrix[i][j]
+    return result
+
+
+def add_matrices(a, b):
+    rows = len(a)
+    cols = len(a[0])
+    result = [[0] * cols for _ in range(rows)]
+    for i in range(rows):
+        for j in range(cols):
+            result[i][j] = a[i][j] + b[i][j]
+    return result
+
+
+def multiply_matrices(a, b):
+    rows_a = len(a)
+    cols_a = len(a[0])
+    cols_b = len(b[0])
+    result = [[0] * cols_b for _ in range(rows_a)]
+    for i in range(rows_a):
+        for j in range(cols_b):
+            total = 0
+            for k in range(cols_a):
+                total += a[i][k] * b[k][j]
+            result[i][j] = total
+    return result
+
+
+def main():
+    # ----- Part A: Transpose -----
+    print("=== Part A: Transpose ===")
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+    matrix = read_matrix(rows, cols)
+
+    print("\nOriginal Matrix:")
+    print_matrix(matrix)
+    print("\nTransposed Matrix:")
+    print_matrix(transpose(matrix))
+
+    # ----- Part B: Addition -----
+    print("\n=== Part B: Add Two Matrices ===")
+    rows = int(input("Enter number of rows: "))
+    cols = int(input("Enter number of columns: "))
+    a = read_matrix(rows, cols, "A")
+    b = read_matrix(rows, cols, "B")
+
+    print("\nSum:")
+    print_matrix(add_matrices(a, b))
+
+    # ----- Part C: Multiplication -----
+    print("\n=== Part C: Multiply Two Matrices ===")
+    m = int(input("Enter rows of A: "))
+    n = int(input("Enter columns of A / rows of B: "))
+    p = int(input("Enter columns of B: "))
+    a = read_matrix(m, n, "A")
+    b = read_matrix(n, p, "B")
+
+    print("\nProduct (A x B):")
+    print_matrix(multiply_matrices(a, b))
+
+
+if __name__ == "__main__":
+    main()
+
